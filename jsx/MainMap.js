@@ -19,6 +19,7 @@ import {
 const accessToken = 'pk.eyJ1IjoiaHNpYW5neXVodSIsImEiOiJjaWxjZmIwbmcydGdzdHlseHUyaWt4dTl6In0.grkL-R6ioaY38yuWIB-qRA';
 Mapbox.setAccessToken(accessToken);
 var {height, width} = Dimensions.get('window');
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 var MainMap = React.createClass({
@@ -36,7 +37,7 @@ var MainMap = React.createClass({
       UserLon: 121.43201887607574,
       annotations: [
       
-            {
+      {
         coordinates: [ 25.03421031256830, 121.43342248918152],
         type: 'point',
         id: '0',
@@ -1565,7 +1566,8 @@ var MainMap = React.createClass({
   onUpdateUserLocation(location){
     //console.log(location.latitude);
     //console.log(location.longitude);
-    this._map && this._map.setCenterCoordinate(location.latitude, location.longitude);
+    
+
     this.setState({
       UserLat: location.latitude,
       UserLon: location.longitude
@@ -1582,10 +1584,11 @@ var MainMap = React.createClass({
         id: 'Pacman'
       }]
     });
-
+    
     // reloading
     this.forceUpdate();
-
+    
+    this.removeMarker();
   },
 
   calculateDistance(Lat: number, Lon: number){
@@ -1606,24 +1609,24 @@ var MainMap = React.createClass({
     //console.log(annotation.title);
     //console.log(annotation.latitude);
     //console.log(annotation.longitude);
-    let distance=this.calculateDistance(annotation.latitude,annotation.longitude);
+    // let distance=this.calculateDistance(annotation.latitude,annotation.longitude);
 
     //console.log(distance+"公尺");//單位為公尺
     //小於7公尺，豆子則消失
-    if(distance<7 && annotation.id!='Pacman'){
-      this.state = {
-        annotations: this.state.annotations.filter(a => a.id !== annotation.id),
-        Score: this.state.Score + 10  
+    // if(distance<7 && annotation.id!='Pacman'){
+    //   this.state = {
+    //     annotations: this.state.annotations.filter(a => a.id !== annotation.id),
+    //     Score: this.state.Score + 10  
         
-      }
-    }
+    //   }
+    // }
     
     
     // reloading
     //this.forceUpdate();
 
   },
-  onPressIn_explore(){
+  onPress_Zoom(){
     let temp = 19;
     if(this.state.zoomOut != true){
       temp = 16;
@@ -1633,26 +1636,39 @@ var MainMap = React.createClass({
       zoomOut: !(this.state.zoomOut),
     });
   },
+  onPress_Center(){
+    this._map && this._map.setCenterCoordinate(this.state.UserLat,this.state.UserLon);
+  },
   onPressOut_explore() {
-    this.removeMarker();
+    //this.removeMarker();
     
   },
   removeMarker(){
     let Counter = 0;
-    console.log("UserLat:"+this.state.UserLat+",UserLon:"+this.state.UserLon);
     this.setState({
       annotations: this.state.annotations.filter(a =>  {
+
+          if(a.id == 'Pacman'){
+            return a;
+          }
+          
+
           //在annotation上該id不應存在的會消逝
-          if(!(Math.abs(a.coordinates[0]-this.state.UserLat)<0.00005 && Math.abs(a.coordinates[1]-this.state.UserLon)<0.000033 && a.id!='Pacman'))
+          //0.000045-->5m , 0.000044-->5m
+          if(!(Math.abs(a.coordinates[0]-this.state.UserLat)<0.000045 && Math.abs(a.coordinates[1]-this.state.UserLon)<0.000044))
           {
               return a;
           }
+
           
             Counter++;  
 
         }),
-      Score: this.state.Score + 10*Counter  
+      Score: this.state.Score + 10*Counter,  
     });
+
+    this.forceUpdate();
+    
 
   },
   render() {
@@ -1660,13 +1676,13 @@ var MainMap = React.createClass({
     return (
       <View style={styles.container}>
         <View style={styles.Score}>
-          <Text style={styles.welcome}>
-            Score
-          </Text>
-          <Text style={styles.welcome}>
-            {this.state.Score}
-          </Text>
-        </View>   
+            <Text style={styles.welcome}>
+              Score
+            </Text>
+            <Text style={styles.welcome}>
+              {this.state.Score}
+            </Text>
+          </View>  
         <MapView
           ref={map => { this._map = map; }}
           style={styles.map}
@@ -1691,13 +1707,15 @@ var MainMap = React.createClass({
           onLongPress={this.onLongPress}
           onTap={this.onTap}
         />
-        <TouchableOpacity
-                //onPressIn={this.onPressIn_explore}
-                onPressOut={this.onPressOut_explore}
-                style={{borderRadius: 100,position: 'absolute',left: (width-130)/2,top: height-170}}>
-                    <Image source={require('../Img/explore_new.png')} 
-                         style={{width:130,height:130}}/>
-        </TouchableOpacity>
+        <View style={{position: 'absolute',left: width-70,top: height-150}}>
+          <Icon.Button name={(this.state.zoomOut)? "zoom-in" : "zoom-out"} color="black" backgroundColor="#FFFFFF" 
+            size={33} iconStyle={{margin: 7}} borderRadius={100} onPress={this.onPress_Zoom}></Icon.Button>
+        </View>
+        <View style={{position: 'absolute',left: width-70,top: height-230}}>
+          <Icon.Button name="gps-fixed" color="black" backgroundColor="#FFFFFF" borderRadius={100}
+            size={30} iconStyle={{margin: 10}} onPress={this.onPress_Center}></Icon.Button>
+        </View>
+        
       </View>     
     );
   }
