@@ -170,6 +170,19 @@ var MainMap = React.createClass({
       UserLat: location.latitude,
       UserLon: location.longitude
     });
+    this.setState({
+      annotations: [ ...this.state.annotations, {
+        coordinates: [location.latitude,location.longitude],
+        type: 'point',
+        annotationImage: {
+            source: { uri: 'Icon' },
+            height: 10,
+            width: 10
+          },
+        id: 'Pacman'
+      }]
+    });
+
   },
 
   calculateDistance(Lat: number, Lon: number){
@@ -205,79 +218,79 @@ var MainMap = React.createClass({
   onPressOut_explore() {
     
     
-    // this.setState({press_explore: false});
-    // var MonsterLat = [];//Lat
-    // var MonsterLon = [];//Lon
-    // for(this.state.i=0;this.state.i<5;this.state.i++){
-    //   let distance = 0.00003;
-    //   let ID = 'No.'+ this.state.i;
-    //   let x = Math.floor(Math.random() * 20 - 10);//-10~10
-    //   let y = Math.floor(Math.random() * 20 - 10);//-10~10
-    //   this.state.newLat = this.state.UserLat + x*distance;
-    //   this.state.newLon = this.state.UserLon + y*distance;
-    //   //console.log(x);
-    //   //console.log(y);
-    //   //console.log(this.state.newLat);
-    //   //console.log(this.state.newLon);
-    //   MonsterLat[this.state.i] = this.state.newLat;
-    //   MonsterLon[this.state.i] = this.state.newLon;
+    this.setState({press_explore: false});
+    var MonsterLat = [];//Lat
+    var MonsterLon = [];//Lon
+    for(this.state.i=0;this.state.i<5;this.state.i++){
+      let distance = 0.00003;
+      let ID = 'No.'+ this.state.i;
+      let x = Math.floor(Math.random() * 20 - 10);//-10~10
+      let y = Math.floor(Math.random() * 20 - 10);//-10~10
+      this.state.newLat = this.state.UserLat + x*distance;
+      this.state.newLon = this.state.UserLon + y*distance;
+      //console.log(x);
+      //console.log(y);
+      //console.log(this.state.newLat);
+      //console.log(this.state.newLon);
+      MonsterLat[this.state.i] = this.state.newLat;
+      MonsterLon[this.state.i] = this.state.newLon;
       
-    // }
-    // this.setState({
-    //   annotations: [ ...this.state.annotations, {
-    //     coordinates: [MonsterLat[0],MonsterLon[0]],
-    //     type: 'point',
-    //     title: '我是怪物',
-    //     annotationImage: {
-    //         source: { uri: 'green' },
-    //         height: 45,
-    //         width: 45
-    //       },
-    //     id: 'M0'
-    //   },{
-    //     coordinates: [MonsterLat[1],MonsterLon[1]],
-    //     type: 'point',
-    //     title: '我是怪物',
-    //     annotationImage: {
-    //         source: { uri: 'green' },
-    //         height: 45,
-    //         width: 45
-    //       },
-    //     id: 'M1'
-    //   },{
-    //     coordinates: [MonsterLat[2],MonsterLon[2]],
-    //     type: 'point',
-    //     title: '我是怪物',
-    //     annotationImage: {
-    //         source: { uri: 'yellow' },
-    //         height: 45,
-    //         width: 45
-    //       },
-    //     id: 'M2'
-    //   },{
-    //     coordinates: [MonsterLat[3],MonsterLon[3]],
-    //     type: 'point',
-    //     title: '我是怪物',
-    //     annotationImage: {
-    //         source: { uri: 'green' },
-    //         height: 45,
-    //         width: 45
-    //       },
-    //     id: 'M3'
-    //   },{
-    //     coordinates: [MonsterLat[4],MonsterLon[4]],
-    //     type: 'point',
-    //     title: '我是怪物',
-    //     annotationImage: {
-    //         source: { uri: 'red' },
-    //         height: 45,
-    //         width: 45
-    //       },
-    //     id: 'M4'
-    //   },
+    }
+    this.setState({
+      annotations: [ ...this.state.annotations, {
+        coordinates: [MonsterLat[0],MonsterLon[0]],
+        type: 'point',
+        title: '我是怪物',
+        annotationImage: {
+            source: { uri: 'green' },
+            height: 45,
+            width: 45
+          },
+        id: 'M0'
+      },{
+        coordinates: [MonsterLat[1],MonsterLon[1]],
+        type: 'point',
+        title: '我是怪物',
+        annotationImage: {
+            source: { uri: 'green' },
+            height: 45,
+            width: 45
+          },
+        id: 'M1'
+      },{
+        coordinates: [MonsterLat[2],MonsterLon[2]],
+        type: 'point',
+        title: '我是怪物',
+        annotationImage: {
+            source: { uri: 'yellow' },
+            height: 45,
+            width: 45
+          },
+        id: 'M2'
+      },{
+        coordinates: [MonsterLat[3],MonsterLon[3]],
+        type: 'point',
+        title: '我是怪物',
+        annotationImage: {
+            source: { uri: 'green' },
+            height: 45,
+            width: 45
+          },
+        id: 'M3'
+      },{
+        coordinates: [MonsterLat[4],MonsterLon[4]],
+        type: 'point',
+        title: '我是怪物',
+        annotationImage: {
+            source: { uri: 'red' },
+            height: 45,
+            width: 45
+          },
+        id: 'M4'
+      },
 
-    //   ]
-    // });
+      ]
+    });
 
     
   },
@@ -296,6 +309,7 @@ var MainMap = React.createClass({
           zoomEnabled={false}
           showsUserLocation={false}
           styleURL={'mapbox://styles/hsiangyuhu/ciy6sglip00062ss72fuy7zsg'}
+          // styleURL={'mapbox://styles/alvinyang/ciy6sjnqj00082qmk3kiv021h'}
           userTrackingMode={this.state.userTrackingMode}
           annotations={this.state.annotations}
           annotationsAreImmutable={true}
@@ -310,7 +324,7 @@ var MainMap = React.createClass({
         />
         <TouchableOpacity
                 onPressIn={this.onPressIn_explore}
-                onPressOut={this.onPressOut_explore}
+                //onPressOut={this.onPressOut_explore}
                 style={{borderRadius: 100,position: 'absolute',left: (width-130)/2,top: height-170}}>
                     <Image source={require('../Img/explore_new.png')} 
                          style={{width:130,height:130}}/>
