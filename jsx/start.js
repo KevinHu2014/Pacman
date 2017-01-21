@@ -1,47 +1,66 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Image,
+  TouchableHighlight,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable'
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class start extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+        <LinearGradient colors={['#EB8128','#E76128','#E34228']} style={{flex: 1,justifyContent: 'center',alignItems: 'center',}}>
+          <View style={styles.blank}></View>
+          <View style={styles.Logo}>
+            <Animatable.Image 
+                animation="lightSpeedIn" iterationCount={1}
+                source={require('../Img/Icon.png')} 
+                style={{width:180,height:180 }}>
+            </Animatable.Image>
+          </View>
+          <View style={styles.blank}></View>
+          <View style={styles.start}>
+            <Animatable.Text style={styles.welcome} delay={1000}
+                animation="tada" iterationCount="infinite"
+                onPress={this.onPress}>
+              {"START"}
+            </Animatable.Text>
+          </View>
+          <View style={styles.blank}>
+            <Text style={styles.welcome}>
+              {
+                //data.monster[0].name
+              }
+            </Text>
+          </View>
+        </LinearGradient>
+    	</View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  blank:{
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  start:{
+    flex: 2,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  Logo:{
+    flex: 3,
   },
+  welcome:{
+    fontSize: 30,
+    fontWeight: "bold",
+    color:'#FFFFFF'
+  },
+ 	container: {
+    flex: 1,
+	},
 });
 
