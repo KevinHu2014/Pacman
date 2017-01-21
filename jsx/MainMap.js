@@ -31,7 +31,7 @@ var MainMap = React.createClass({
       },
       zoom: 19,
       zoomOut: false,
-      userTrackingMode: Mapbox.userTrackingMode.follow,
+      userTrackingMode: Mapbox.userTrackingMode.none,
       Score: 0,
       UserLat: 25.035770510088796,
       UserLon: 121.43201887607574,
@@ -1708,15 +1708,15 @@ var MainMap = React.createClass({
           onTap={this.onTap}
         />
         <View style={{position: 'absolute',left: width-70,top: height-150}}>
-          <Icon.Button name={(this.state.zoomOut)? "zoom-in" : "zoom-out"} color="black" backgroundColor="#FFFFFF" 
+          <Icon.Button name={(this.state.zoomOut)? "zoom-in" : "zoom-out"} color="#FFFFFF" backgroundColor="#C200DD" 
             size={33} iconStyle={{margin: 7}} borderRadius={100} onPress={this.onPress_Zoom}></Icon.Button>
         </View>
         <View style={{position: 'absolute',left: width-70,top: height-230}}>
-          <Icon.Button name="gps-fixed" color="black" backgroundColor="#FFFFFF" borderRadius={100}
+          <Icon.Button name="gps-fixed" color="#FFF" backgroundColor="#19C6EC" borderRadius={100}
             size={30} iconStyle={{margin: 10}} onPress={this.onPress_Center}></Icon.Button>
         </View>
         <View style={{position: 'absolute',left: width-70,top: height-310}}>
-          <Icon_1.Button name="magnet" color="black" backgroundColor="#FFFFFF" borderRadius={100}
+          <Icon_1.Button name="magnet" color="#FFF" backgroundColor="#F3007C" borderRadius={100}
             size={30} iconStyle={{margin: 10}} onPress={this.removeMarker}></Icon_1.Button>
         </View>
       </View>     
