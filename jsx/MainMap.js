@@ -28,9 +28,9 @@ var MainMap = React.createClass({
         latitude: 25.03569,
         longitude: 121.43289
       },
-      zoom: 19,
+      zoom: 18,
       zoomOut: false,
-      userTrackingMode: Mapbox.userTrackingMode.none,
+      userTrackingMode: Mapbox.userTrackingMode.follow,
       
       i: 5,
       UserLat: 25.035770510088796,
@@ -45,8 +45,8 @@ var MainMap = React.createClass({
         id: '0',
         annotationImage: {
             source: { uri: 'bean' },
-            height: 6,
-            width: 6
+            height: 12,
+            width: 12
           },
       },
       {
@@ -163,8 +163,8 @@ var MainMap = React.createClass({
     }
   },
   onUpdateUserLocation(location){
-    console.log(location.latitude);
-    console.log(location.longitude);
+    //console.log(location.latitude);
+    //console.log(location.longitude);
     this._map && this._map.setCenterCoordinate(location.latitude, location.longitude);
     this.setState({
       UserLat: location.latitude,
@@ -175,9 +175,9 @@ var MainMap = React.createClass({
         coordinates: [location.latitude,location.longitude],
         type: 'point',
         annotationImage: {
-            source: { uri: 'Icon' },
-            height: 10,
-            width: 10
+            source: { uri: 'pacman' },
+            height: 40,
+            width: 40
           },
         id: 'Pacman'
       }]
@@ -304,12 +304,12 @@ var MainMap = React.createClass({
           initialCenterCoordinate={this.state.center}
           initialZoomLevel={this.state.zoom}
           initialDirection={0}
-          rotateEnabled={true}
+          rotateEnabled={false}
           scrollEnabled={true}
           zoomEnabled={false}
+          pitchEnabled={false}
           showsUserLocation={false}
-          styleURL={'mapbox://styles/hsiangyuhu/ciy6sglip00062ss72fuy7zsg'}
-          // styleURL={'mapbox://styles/alvinyang/ciy6sjnqj00082qmk3kiv021h'}
+          styleURL={'mapbox://styles/hsiangyuhu/ciy6xumka000b2smutk8cjmpc'}
           userTrackingMode={this.state.userTrackingMode}
           annotations={this.state.annotations}
           annotationsAreImmutable={true}
