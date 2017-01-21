@@ -28,7 +28,7 @@ var MainMap = React.createClass({
         latitude: 25.03569,
         longitude: 121.43289
       },
-      zoom: 18,
+      zoom: 19,
       zoomOut: false,
       userTrackingMode: Mapbox.userTrackingMode.follow,
       
