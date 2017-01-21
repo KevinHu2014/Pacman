@@ -20,7 +20,7 @@ const accessToken = 'pk.eyJ1IjoiaHNpYW5neXVodSIsImEiOiJjaWxjZmIwbmcydGdzdHlseHUy
 Mapbox.setAccessToken(accessToken);
 var {height, width} = Dimensions.get('window');
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import Icon_1 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 var MainMap = React.createClass({
   getInitialState() {
@@ -1563,6 +1563,10 @@ var MainMap = React.createClass({
       
     }
   },
+  componentDidUpdate(){
+    
+  },
+
   onUpdateUserLocation(location){
     //console.log(location.latitude);
     //console.log(location.longitude);
@@ -1587,8 +1591,8 @@ var MainMap = React.createClass({
     
     // reloading
     this.forceUpdate();
+    //this.removeMarker();
     
-    this.removeMarker();
   },
 
   calculateDistance(Lat: number, Lon: number){
@@ -1651,23 +1655,19 @@ var MainMap = React.createClass({
           if(a.id == 'Pacman'){
             return a;
           }
-          
-
           //在annotation上該id不應存在的會消逝
           //0.000045-->5m , 0.000044-->5m
           if(!(Math.abs(a.coordinates[0]-this.state.UserLat)<0.000045 && Math.abs(a.coordinates[1]-this.state.UserLon)<0.000044))
           {
               return a;
           }
-
-          
             Counter++;  
-
+            
         }),
       Score: this.state.Score + 10*Counter,  
     });
 
-    this.forceUpdate();
+    //this.forceUpdate();
     
 
   },
@@ -1715,7 +1715,10 @@ var MainMap = React.createClass({
           <Icon.Button name="gps-fixed" color="black" backgroundColor="#FFFFFF" borderRadius={100}
             size={30} iconStyle={{margin: 10}} onPress={this.onPress_Center}></Icon.Button>
         </View>
-        
+        <View style={{position: 'absolute',left: width-70,top: height-310}}>
+          <Icon_1.Button name="magnet" color="black" backgroundColor="#FFFFFF" borderRadius={100}
+            size={30} iconStyle={{margin: 10}} onPress={this.removeMarker}></Icon_1.Button>
+        </View>
       </View>     
     );
   }
