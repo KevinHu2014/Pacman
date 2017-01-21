@@ -1590,7 +1590,7 @@ var MainMap = React.createClass({
 
   calculateDistance(Lat: number, Lon: number){
     let xd = (Lat - this.state.UserLat)*110000;
-    console.log("Lat:"+Lat+",UserLat:"+this.state.UserLat);
+    //console.log("Lat:"+Lat+",UserLat:"+this.state.UserLat);
     let yd = (Lon - this.state.UserLon)*110000;
     //console.log("x:"+xd+",y:"+yd);
 
@@ -1608,7 +1608,7 @@ var MainMap = React.createClass({
     //console.log(annotation.longitude);
     let distance=this.calculateDistance(annotation.latitude,annotation.longitude);
 
-    console.log(distance+"公尺");//單位為公尺
+    //console.log(distance+"公尺");//單位為公尺
     //小於7公尺，豆子則消失
     if(distance<7 && annotation.id!='Pacman'){
       this.state = {
@@ -1634,8 +1634,26 @@ var MainMap = React.createClass({
     });
   },
   onPressOut_explore() {
+    this.removeMarker();
     
-    
+  },
+  removeMarker(){
+    let Counter = 0;
+    console.log("UserLat:"+this.state.UserLat+",UserLon:"+this.state.UserLon);
+    this.setState({
+      annotations: this.state.annotations.filter(a =>  {
+          //在annotation上該id不應存在的會消逝
+          if(!(Math.abs(a.coordinates[0]-this.state.UserLat)<0.00005 && Math.abs(a.coordinates[1]-this.state.UserLon)<0.000033 && a.id!='Pacman'))
+          {
+              return a;
+          }
+          
+            Counter++;  
+
+        }),
+      Score: this.state.Score + 10*Counter  
+    });
+
   },
   render() {
    
@@ -1674,8 +1692,8 @@ var MainMap = React.createClass({
           onTap={this.onTap}
         />
         <TouchableOpacity
-                onPressIn={this.onPressIn_explore}
-                //onPressOut={this.onPressOut_explore}
+                //onPressIn={this.onPressIn_explore}
+                onPressOut={this.onPressOut_explore}
                 style={{borderRadius: 100,position: 'absolute',left: (width-130)/2,top: height-170}}>
                     <Image source={require('../Img/explore_new.png')} 
                          style={{width:130,height:130}}/>
