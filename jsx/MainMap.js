@@ -1707,18 +1707,18 @@ var MainMap = React.createClass({
           onLongPress={this.onLongPress}
           onTap={this.onTap}
         />
-        <View style={{position: 'absolute',left: width-70,top: height-150}}>
+        <TouchableOpacity style={{position: 'absolute',left: width-70,top: height-150,elevation:10}}>
           <Icon.Button name={(this.state.zoomOut)? "zoom-in" : "zoom-out"} color="#FFFFFF" backgroundColor="#C200DD" 
             size={33} iconStyle={{margin: 7}} borderRadius={100} onPress={this.onPress_Zoom}></Icon.Button>
-        </View>
-        <View style={{position: 'absolute',left: width-70,top: height-230}}>
+        </TouchableOpacity>
+        <TouchableOpacity style={{position: 'absolute',left: width-70,top: height-230,elevation:10}}>
           <Icon.Button name="gps-fixed" color="#FFF" backgroundColor="#19C6EC" borderRadius={100}
             size={30} iconStyle={{margin: 10}} onPress={this.onPress_Center}></Icon.Button>
-        </View>
-        <View style={{position: 'absolute',left: width-70,top: height-310}}>
+        </TouchableOpacity>
+        <TouchableOpacity style={{position: 'absolute',left: width-70,top: height-310,elevation:10}}>
           <Icon_1.Button name="magnet" color="#FFF" backgroundColor="#F3007C" borderRadius={100}
             size={30} iconStyle={{margin: 10}} onPress={this.removeMarker}></Icon_1.Button>
-        </View>
+        </TouchableOpacity>
       </View>     
     );
   }
@@ -1741,6 +1741,7 @@ const styles = StyleSheet.create({
   },
   welcome: {
     flex: 1,
+    fontWeight: "bold",
     fontFamily: 'monospace',
     fontSize: 18,
     color: 'white',
