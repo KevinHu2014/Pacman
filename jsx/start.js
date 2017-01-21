@@ -14,7 +14,7 @@ export default class start extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <LinearGradient colors={['#EB8128','#E76128','#E34228']} style={{flex: 1,justifyContent: 'center',alignItems: 'center',}}>
+        <LinearGradient colors={['#00c6ff','#0072ff']} style={{flex: 1,justifyContent: 'center',alignItems: 'center',}}>
           <View style={styles.blank}></View>
           <View style={styles.Logo}>
             <Animatable.Image 

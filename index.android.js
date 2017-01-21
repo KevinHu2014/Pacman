@@ -1,5 +1,4 @@
 
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -7,5 +6,5 @@ import {
   Text,
   View
 } from 'react-native';
-import Pacman from './jsx/start';
+import Pacman from './jsx/MainMap';
 AppRegistry.registerComponent('Pacman', () => Pacman);
