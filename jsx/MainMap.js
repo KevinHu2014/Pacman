@@ -29,6 +29,7 @@ var MainMap = React.createClass({
         longitude: 121.43289
       },
       zoom: 19,
+      zoomOut: false,
       userTrackingMode: Mapbox.userTrackingMode.none,
       
       i: 5,
@@ -191,87 +192,94 @@ var MainMap = React.createClass({
     
     
   },
-  Random_Monster(){
-    
+  onPressIn_explore(){
+    let temp = 19;
+    if(this.state.zoomOut != true){
+      temp = 16;
+    }
+    this._map && this._map.setZoomLevel(temp)
+    this.setState({
+      zoomOut: !(this.state.zoomOut),
+    });
   },
   onPressOut_explore() {
-    this.setState({press_explore: false});
-    var MonsterLat = [];//Lat
-    var MonsterLon = [];//Lon
-    for(this.state.i=0;this.state.i<5;this.state.i++){
-      let distance = 0.00003;
-      let ID = 'No.'+ this.state.i;
-      let x = Math.floor(Math.random() * 20 - 10);//-10~10
-      let y = Math.floor(Math.random() * 20 - 10);//-10~10
-      this.state.newLat = this.state.UserLat + x*distance;
-      this.state.newLon = this.state.UserLon + y*distance;
-      //console.log(x);
-      //console.log(y);
-      //console.log(this.state.newLat);
-      //console.log(this.state.newLon);
-      MonsterLat[this.state.i] = this.state.newLat;
-      MonsterLon[this.state.i] = this.state.newLon;
+    
+    
+    // this.setState({press_explore: false});
+    // var MonsterLat = [];//Lat
+    // var MonsterLon = [];//Lon
+    // for(this.state.i=0;this.state.i<5;this.state.i++){
+    //   let distance = 0.00003;
+    //   let ID = 'No.'+ this.state.i;
+    //   let x = Math.floor(Math.random() * 20 - 10);//-10~10
+    //   let y = Math.floor(Math.random() * 20 - 10);//-10~10
+    //   this.state.newLat = this.state.UserLat + x*distance;
+    //   this.state.newLon = this.state.UserLon + y*distance;
+    //   //console.log(x);
+    //   //console.log(y);
+    //   //console.log(this.state.newLat);
+    //   //console.log(this.state.newLon);
+    //   MonsterLat[this.state.i] = this.state.newLat;
+    //   MonsterLon[this.state.i] = this.state.newLon;
       
-    }
-    this.setState({
-      annotations: [ ...this.state.annotations, {
-        coordinates: [MonsterLat[0],MonsterLon[0]],
-        type: 'point',
-        title: '我是怪物',
-        annotationImage: {
-            source: { uri: 'green' },
-            height: 45,
-            width: 45
-          },
-        id: 'M0'
-      },{
-        coordinates: [MonsterLat[1],MonsterLon[1]],
-        type: 'point',
-        title: '我是怪物',
-        annotationImage: {
-            source: { uri: 'green' },
-            height: 45,
-            width: 45
-          },
-        id: 'M1'
-      },{
-        coordinates: [MonsterLat[2],MonsterLon[2]],
-        type: 'point',
-        title: '我是怪物',
-        annotationImage: {
-            source: { uri: 'yellow' },
-            height: 45,
-            width: 45
-          },
-        id: 'M2'
-      },{
-        coordinates: [MonsterLat[3],MonsterLon[3]],
-        type: 'point',
-        title: '我是怪物',
-        annotationImage: {
-            source: { uri: 'green' },
-            height: 45,
-            width: 45
-          },
-        id: 'M3'
-      },{
-        coordinates: [MonsterLat[4],MonsterLon[4]],
-        type: 'point',
-        title: '我是怪物',
-        annotationImage: {
-            source: { uri: 'red' },
-            height: 45,
-            width: 45
-          },
-        id: 'M4'
-      },
+    // }
+    // this.setState({
+    //   annotations: [ ...this.state.annotations, {
+    //     coordinates: [MonsterLat[0],MonsterLon[0]],
+    //     type: 'point',
+    //     title: '我是怪物',
+    //     annotationImage: {
+    //         source: { uri: 'green' },
+    //         height: 45,
+    //         width: 45
+    //       },
+    //     id: 'M0'
+    //   },{
+    //     coordinates: [MonsterLat[1],MonsterLon[1]],
+    //     type: 'point',
+    //     title: '我是怪物',
+    //     annotationImage: {
+    //         source: { uri: 'green' },
+    //         height: 45,
+    //         width: 45
+    //       },
+    //     id: 'M1'
+    //   },{
+    //     coordinates: [MonsterLat[2],MonsterLon[2]],
+    //     type: 'point',
+    //     title: '我是怪物',
+    //     annotationImage: {
+    //         source: { uri: 'yellow' },
+    //         height: 45,
+    //         width: 45
+    //       },
+    //     id: 'M2'
+    //   },{
+    //     coordinates: [MonsterLat[3],MonsterLon[3]],
+    //     type: 'point',
+    //     title: '我是怪物',
+    //     annotationImage: {
+    //         source: { uri: 'green' },
+    //         height: 45,
+    //         width: 45
+    //       },
+    //     id: 'M3'
+    //   },{
+    //     coordinates: [MonsterLat[4],MonsterLon[4]],
+    //     type: 'point',
+    //     title: '我是怪物',
+    //     annotationImage: {
+    //         source: { uri: 'red' },
+    //         height: 45,
+    //         width: 45
+    //       },
+    //     id: 'M4'
+    //   },
 
-      ]
-    });
+    //   ]
+    // });
 
-    /*this.setState({
-      collapsed: !this.state.collapsed
-    });*/
+    
   },
   render() {
    
