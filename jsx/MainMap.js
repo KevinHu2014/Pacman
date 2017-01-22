@@ -42,7 +42,7 @@ var MainMap = React.createClass({
       currentAppState: AppState.currentState,
       zoom: 19,
       zoomOut: false,
-      userTrackingMode: Mapbox.userTrackingMode.none,
+      userTrackingMode: Mapbox.userTrackingMode.follow,
       Score: 0,
       UserLat: 25.035770510088796,
       UserLon: 121.43201887607574,

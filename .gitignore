@@ -35,6 +35,11 @@ local.properties
 node_modules/
 npm-debug.log
 
+#key
+android/app/
+my-release-key.keystore
+
+
 # BUCK
 buck-out/
 \.buckd/
