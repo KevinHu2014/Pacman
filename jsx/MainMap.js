@@ -6,6 +6,7 @@ import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import {
   Alert,
   StyleSheet,
+  AppState,
   Text,
   StatusBar,
   View,
@@ -14,6 +15,9 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   Dimensions,
+  ToastAndroid,
+  DeviceEventEmitter,
+  NativeModules,
 } from 'react-native';
 
 const accessToken = 'pk.eyJ1IjoiaHNpYW5neXVodSIsImEiOiJjaWxjZmIwbmcydGdzdHlseHUyaWt4dTl6In0.grkL-R6ioaY38yuWIB-qRA';
@@ -21,6 +25,12 @@ Mapbox.setAccessToken(accessToken);
 var {height, width} = Dimensions.get('window');
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon_1 from 'react-native-vector-icons/MaterialCommunityIcons';
+var Sound = require('react-native-sound');
+var s = new Sound('bgm.mp3', Sound.MAIN_BUNDLE, (e) => {
+      
+        s.play();
+        s.setNumberOfLoops(-1);
+    });
 
 var MainMap = React.createClass({
   getInitialState() {
@@ -29,6 +39,7 @@ var MainMap = React.createClass({
         latitude: 25.03569,
         longitude: 121.43289
       },
+      currentAppState: AppState.currentState,
       zoom: 19,
       zoomOut: false,
       userTrackingMode: Mapbox.userTrackingMode.none,
@@ -12975,8 +12986,21 @@ var MainMap = React.createClass({
       
     }
   },
-  componentDidUpdate(){
-    
+  componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange);
+  },
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  },
+  _handleAppStateChange(currentAppState) {
+    this.setState({ currentAppState, });
+    ToastAndroid.show('當前狀態為:'+currentAppState,ToastAndroid.SHORT);
+    if(currentAppState == 'background'){
+        s.pause();
+    }
+    else{
+      s.play();
+    }
   },
 
   onUpdateUserLocation(location){

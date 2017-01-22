@@ -9,8 +9,20 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 import LinearGradient from 'react-native-linear-gradient';
+import MainMap from './MainMap';
 
-export default class start extends Component {
+
+var start = React.createClass({
+  onPress(){
+    const { navigator } = this.props;
+    if(navigator) {
+            navigator.push({
+                name: 'MainMap',
+                component: MainMap,
+                
+            })
+        }
+  },
   render() {
     return (
       <View style={styles.container}>
@@ -32,17 +44,12 @@ export default class start extends Component {
             </Animatable.Text>
           </View>
           <View style={styles.blank}>
-            <Text style={styles.welcome}>
-              {
-                //data.monster[0].name
-              }
-            </Text>
           </View>
         </LinearGradient>
     	</View>
     );
   }
-}
+});
 
 const styles = StyleSheet.create({
   blank:{
@@ -64,3 +71,4 @@ const styles = StyleSheet.create({
 	},
 });
 
+module.exports = start;

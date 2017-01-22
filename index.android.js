@@ -6,5 +6,5 @@ import {
   Text,
   View
 } from 'react-native';
-import Pacman from './jsx/MainMap';
+import Pacman from './jsx/NavInit';
 AppRegistry.registerComponent('Pacman', () => Pacman);

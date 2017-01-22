@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.zmxv.RNSound.RNSoundPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.mapbox.reactnativemapboxgl.ReactNativeMapboxGLPackage;
@@ -30,7 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new ReactNativeMapboxGLPackage()
+            new ReactNativeMapboxGLPackage(),
+            new RNSoundPackage()
       );
     }
   };
