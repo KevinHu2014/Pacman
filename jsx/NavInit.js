@@ -1,10 +1,6 @@
 
-import React, { Component } from 'react';
-import  {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
+import React from 'react';
+import {
   Navigator,
 } from 'react-native';
 import start from './start';
@@ -12,22 +8,22 @@ import start from './start';
 
 export default class NavInit extends React.Component {
     render() {
-        let defaultName = 'start';
-        let defaultComponent = start;
+        const defaultName = 'start';
+        const defaultComponent = start;
         return (
         <Navigator
           initialRoute={{ name: defaultName, component: defaultComponent }}
           //啟動app時，所看到的初始頁面
-          configureScene={(route) => {
-            return Navigator.SceneConfigs.FadeAndroid;
-            //轉場動畫效果
-          }}
+          configureScene={() =>
+            Navigator.SceneConfigs.FadeAndroid
+          }
           renderScene={(route, navigator) => {
-            let Component = route.component;
-            return <Component {...route.params} navigator={navigator} />
-          }} />
+            const Component = route.component;
+            return <Component {...route.params} navigator={navigator} />;
+          }} 
+        />
         );
     }
 } 
 
-module.exports =  NavInit;
+module.exports = NavInit;
