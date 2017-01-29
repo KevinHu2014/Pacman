@@ -8,6 +8,12 @@ This project was inspired by Google map's easter egg in 2015(Playing Pac-Man ins
 
 
 ##Demo
+![alt text](https://github.com/KevinHu2014/Pacman/blob/master/screenshots/demo.gif "Demo")
+
+![alt text](https://github.com/KevinHu2014/Pacman/blob/master/screenshots/01.png "Demo")
+
+![alt text](https://github.com/KevinHu2014/Pacman/blob/master/screenshots/02.png "Demo")
+
 
 ##Installation
 
